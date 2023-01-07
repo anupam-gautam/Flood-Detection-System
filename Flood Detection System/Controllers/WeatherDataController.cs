@@ -17,8 +17,8 @@ namespace Flood_Detection_System.Controllers
         [Route("WeatherApi")]
         public object WeatherApi(WeatherApiInputOutputModel weatherApiInputModel)
         {
-            weatherApiInputModel.lat = 50.238422;
-            weatherApiInputModel.lon = -94.438956;
+            weatherApiInputModel.lat = 28.3949;
+            weatherApiInputModel.lon = 84.1240;
             string aqi = weatherApiInputModel.airQualityIndex ? "yes" : "no";
             string alerts = weatherApiInputModel.airQualityIndex ? "yes" : "no";
             string apiUrl = "https://api.weatherapi.com/v1/forecast.json?key=068bfabb64a443f592b152849222712&q=" + weatherApiInputModel.lat + "," + weatherApiInputModel.lon + "&days=" + weatherApiInputModel.forecastDays + "&aqi=" + aqi + "&alerts=" + alerts;
@@ -28,7 +28,7 @@ namespace Flood_Detection_System.Controllers
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
             var response = client.Execute(request);
             var res = JsonSerializer.Deserialize<WeatherOutput>(response.Content);
-            return res;
+            return response.Content;
         }
    
     }
